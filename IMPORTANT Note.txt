@@ -1,0 +1,4 @@
+I was getting the 504: Endpoint request timed out error frequently without SQS queues between API Gateway and Lambda.
+The max API timeout is 29 seconds and if our lambda takes more than that, the request is gonna timeout.
+Remember, our code uses model to predict and then make an entry in RDS, which could take more than 29 seconds.
+So passing on the messages to SQS queue will not take more than 29 seconds and also lambda can read from the SQS queue to ensure no messages are lost.
